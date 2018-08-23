@@ -1,10 +1,10 @@
 <template>
   <div id="app">
     <div class="sports-field">
-      <h1>{{ title }}</h1>
-      <board :score="score" :miss="miss"></board>
+      <h1 style="color: palevioletred;">{{ title }}</h1>
+      <board :results="results"></board>
       <goal></goal>
-      <ball :image="src" @score="score ++" @miss="miss ++"></ball>
+      <ball :image="src" @score="storeResult('score')" @miss="storeResult('miss')"></ball>
     </div>
   </div>
 </template>
@@ -13,26 +13,29 @@
 import Goal from './components/Goal.vue'
 import Ball from './components/Ball.vue'
 import Board from './components/Board.vue'
-
 export default {
   components: {
     Goal,
     Ball,
-    Board//这个很重要，一定要加
+    Board
   }, 
 
   data () {
     return {
+      results: [],
       score: 0,
-      miss:0,
+      miss: 0,
       status: '',
-      title: "A little ball ball⚽️",
+      title: "⚽️ little ball **",
       goalClass: "something-great",
-      src:'/static/soccer-ball.png'
+      src: '/static/soccer-ball.png'
     }
   },
 
   methods: {
+    storeResult (results){
+      this.results.push(results)
+    },
     // shoot () { 
     //   const results = [
     //     'miss',
@@ -46,12 +49,12 @@ export default {
     //   }, 800)
     // },
 
-    // reset () {
-    //   this.status = 'reset'
-    //   setTimeout(() => {
-    //     this.status = ''
-    //   }, 500)
-    // },
+    reset () {
+      this.status = 'reset'
+      setTimeout(() => {
+        this.status = ''
+      }, 500)
+    },
 
     // imageSrc(){
     //   return '/static/soccer-ball.png'

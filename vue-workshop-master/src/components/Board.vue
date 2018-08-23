@@ -1,19 +1,48 @@
-<template >
+<template>
     <div class="board">
-        <div class="board-score">Current score is: {{ score }}</div>
-        <div class="board-miss">Miss number is: {{ miss }}</div>
+        <div class="board-score">Your score is {{ score }}</div>
+        <div class="board-miss">You missed {{ miss }}</div>
+        <ol>
+            <li v-for="result in results">
+                {{  result }}
+            </li>
+        </ol>
     </div>
 </template>
 
 <script>
 export default {
-    props:[
-        'score',
-        'miss'
-    ]
+    props: [
+        'results'
+    ],
+
+    computed: {
+        score(){
+            var score = 0
+
+            for (var i =0; i <this.results.length; i++){
+                if (this.results(i)  == 'score'){
+                    score ++
+                }
+            }
+            return score
+        },
+
+        miss(){
+            var miss = 0
+
+            for (var i =0; i <this.results.length; i++){
+                if (this.results(i)  == 'miss'){
+                    miss ++
+                }
+            }
+            return miss
+        }
+    }
 }
 </script>
 
 <style>
 
 </style>
+

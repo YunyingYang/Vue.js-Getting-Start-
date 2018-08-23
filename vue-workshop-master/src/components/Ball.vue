@@ -15,16 +15,15 @@ export default {
         }
     },
 
-    props:[
+    props: [
         'image'
     ],
 
-    watch:{
+    watch: {
         status(){
-            //console.log('Boom')
-            if(this.status === 'score'){
+            if (this.status === 'score'){
                 this.$emit('score')
-            }else if (this.status == 'miss'){
+            } else if (this.status === 'miss') {
                 this.$emit('miss')
             }
         }
@@ -39,6 +38,8 @@ export default {
 
             this.status = results[Math.floor(Math.random() * results.length)]
 
+            //if (this.status === 'score') {}
+
             setTimeout(() => {
                 this.reset()
             }, 800)
@@ -50,10 +51,6 @@ export default {
                 this.status = ''
                 }, 500)
         }
-
-        // imageSrc(){
-        //     return '/static/soccer-ball.png'
-        // }
     }
 }
 </script>
